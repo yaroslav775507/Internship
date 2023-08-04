@@ -2,33 +2,55 @@ package org.example;
 
 import java.util.*;
 
-import static javax.swing.text.html.HTML.Tag.MAP;
-
 public class Task_1 {
     public static void main(String[] args) {
+        //Круговой массив
+        Scanner scanner = new Scanner(System.in);
 
-        Scanner s = new Scanner(System.in);
-        //заполнение длинны массива
-        System.out.println("Введите длину интервала");
-        int n = s.nextInt();
+        System.out.print("Введите число n: ");
+        int n = scanner.nextInt();
+
+        System.out.print("Введите число m: ");
+        int m = scanner.nextInt();
+
+        if (n <= 0 || m <= 0) {
+            System.out.println("Аргументы n и m должны быть положительными числами");
+            return;
+        }
+
         int[] array = new int[n];
-        for (int i = 0; i < array.length; i++) {
+        for (int i = 0; i < n; i++) {
             array[i] = i + 1;
         }
-        System.out.print("длина массива равна: ");
-        System.out.println(Arrays.toString(array));
 
+        int currentIndex = 0;
+        StringBuilder path = new StringBuilder();
 
-        System.out.println("Введите количество интервалов");
-        int m = s.nextInt();
-        List<Integer> list = new ArrayList<>();
-        for (int i = 0; i < array.length; i++) {
-            while (!(array[i] == 1)) {
-                for (int j = 0; j < m; j++) {
-                    System.out.println(m);
-
-                }
+        while (path.length() < n+m) {
+            if (currentIndex >= n) {
+                currentIndex -= n;
             }
+
+            for (int i = currentIndex; i < currentIndex + m; i++) {
+                int index = i >= n ? i - n : i;
+                path.append(array[index]);
+            }
+
+            currentIndex += m;
         }
+       // System.out.println("сейчас"+ currentIndex);
+
+
+//        for (int i = 0; i < path.length(); i++) {
+//            currentIndex = (currentIndex+n)%m;
+//            //if(cu)
+//            System.out.print(currentIndex+" ");
+//        }
+
+        System.out.println("Полученный путь: " + path);
     }
 }
+
+
+
+
